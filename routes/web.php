@@ -21,25 +21,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/*Route::get("hola", function () {
-    return 'Hola Andres';
-});
+Route::get("hola", 'holaController');
 
-Route::get('usuario/{nombre?}', function ($nombre = 'Invitado') {
-    return 'Usuario ' . $nombre;
-})->name('usuarionombre');
+Route::get('usuario/{nombre?}', 'UsuarioController@usuariounparametro')->name('usuarionombre');
 
-Route::get('usuario/{nombre}/comentario/{comentarioid}', function ($nombre, $comentarioid) {
-    return 'Usuario ' . $nombre . ' y el comentario es ' . $comentarioid;
-});
+Route::get('usuario/{nombre}/comentario/{comentarioid}', 'UsuarioController@usuariodosparametros');
 
-Route::get('user/{nombre}', function ($nombre) {
-    return 'Usuario ' . $nombre;
-})->where('nombre', '[A-Za-z]+');
+Route::get('user/{nombre}', 'usuario\userController@user')->where('nombre', '[A-Za-z]+');
 
-Route::get('user1/{id}', function ($nombre) {
-    return 'Usuario ' . $nombre;
-})->where('id', '[0-9]+');
+Route::get('user1/{id}', 'usuario\userController@user1')->where('id', '[0-9]+');
 
 Route::get('prueba', function () {
     return 'Pagina de prueba';
@@ -54,4 +44,9 @@ Route::get('redirigirprueba1', function () {
 });
 
 Route::redirect('/prueba3', '/prueba', 301);
-*/
+
+Route::resource('varios', 'variosmetodosrecursos');
+
+Route::resource('varios1', 'variosmetodosrecursos')->only(['index', 'show']);
+
+Route::resource('varios2', 'variosmetodosrecursos')->except(['create', 'store', 'update', "destroy"]);
